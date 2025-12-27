@@ -1,38 +1,16 @@
-# Suraj Nawale – Professional Portfolio
+# React + Vite
 
-This repository contains my personal portfolio website showcasing my work as a
-Software Test Engineer specializing in ETL/Data Warehouse testing, backend data
-validation, and automation using Python Playwright.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Live Website
-(Will be deployed using GitHub Pages)
+Currently, two official plugins are available:
 
-## Core Focus Areas
-- ETL & Data Warehouse Testing
-- SQL Data Validation & Reconciliation
-- Backend & API Testing
-- Python Playwright Automation
-- Workflow Automation (Make.com, n8n)
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Tech Stack
-- React (Vite)
-- HTML5 / CSS3
-- Git & GitHub
-- GitHub Pages
+## React Compiler
 
-## Sections
-- Home
-- About
-- Services
-- Experience
-- Case Studies
-- Resume
-- Contact
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Purpose
-This portfolio is designed for:
-- Freelancing engagements
-- Full-time professional opportunities
+## Expanding the ESLint configuration
 
-## Status
-Project setup in progress.
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
