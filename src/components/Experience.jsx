@@ -1,21 +1,40 @@
+import { motion } from "framer-motion";
+
 export default function Experience() {
   return (
     <section>
       <h3>Professional Experience</h3>
 
-      <div>
+      <motion.div
+        className="experience-card"
+        initial={{ opacity: 0, x: -40 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+      >
         <h4>Software Test Engineer — Wipro</h4>
-        <p>
-          Worked on ETL and Data Warehouse testing for regulatory and banking
-          projects, focusing on data accuracy, backend validation, and automation.
-        </p>
+        <span>ETL / DWH | Banking & Compliance</span>
         <ul>
-          <li>Validated complex ETL pipelines and transformations using SQL</li>
-          <li>Performed reconciliation and data consistency checks across systems</li>
-          <li>Automated UI and regression scenarios using Python Playwright</li>
-          <li>Supported cloud migration testing on GCP and BigQuery</li>
+          <li>Validated complex ETL pipelines for FATCA & CRS reporting</li>
+          <li>Performed SQL-based reconciliation across Oracle & BigQuery</li>
+          <li>Supported cloud migration testing on GCP</li>
+          <li>Automated regression testing using Python Playwright</li>
         </ul>
-      </div>
+      </motion.div>
+
+      <motion.div
+        className="experience-card"
+        initial={{ opacity: 0, x: 40 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+      >
+        <h4>Freelance Automation Specialist</h4>
+        <span>Make.com · n8n · API Integrations</span>
+        <ul>
+          <li>Designed workflow automations for business processes</li>
+          <li>Integrated Gmail, Sheets, CRMs, and REST APIs</li>
+          <li>Reduced manual workload by 40–70%</li>
+        </ul>
+      </motion.div>
     </section>
   );
 }
