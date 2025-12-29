@@ -15,13 +15,8 @@ const App: React.FC = () => {
   }, [terminalLines]);
 
   const triggerDownload = () => {
-    // Note: You must put a file named 'resume.pdf' in your /public folder for this to work.
-    const link = document.createElement('a');
-    link.href = './resume.pdf'; 
-    link.download = 'Suraj_Nawale_CV.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    // Open LinkedIn profile in new tab where CV is available
+    window.open(portfolioData.contact.linkedin, '_blank');
   };
 
   const handleTerminalSubmit = (e: React.FormEvent) => {
@@ -43,7 +38,7 @@ const App: React.FC = () => {
     } else if (cmd === 'diagnostics') {
       out = ['CPU: 12%', 'RAM: 4.2GB / 16GB', 'LATENCY: 14ms', 'UPTIME: 99.99%'];
     } else if (cmd === 'download-cv') {
-      out = 'RESUME_SYNC: Initiating file stream...';
+      out = 'OPENING_LINKEDIN_PROFILE: Resume available for view/download...';
       triggerDownload();
     } else if (cmd === 'clear') {
       setTerminalLines(['[SYSTEM_REFRESHED]']);
