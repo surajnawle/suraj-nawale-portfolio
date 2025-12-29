@@ -6,45 +6,52 @@ import { portfolioData } from './config';
 const App: React.FC = () => {
   const [terminalLines, setTerminalLines] = useState<string[]>(['[SYSTEM_READY]', 'Type "help" for commands...']);
   const [terminalInput, setTerminalInput] = useState('');
-  const terminalEndRef = useRef<HTMLDivElement>(null);
-
-  const scrollToBottom = () => {
-    terminalEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  const terminalBodyRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    scrollToBottom();
+    if (terminalBodyRef.current) {
+      terminalBodyRef.current.scrollTop = terminalBodyRef.current.scrollHeight;
+    }
   }, [terminalLines]);
+
+  const triggerDownload = () => {
+    // Note: You must put a file named 'resume.pdf' in your /public folder for this to work.
+    const link = document.createElement('a');
+    link.href = './resume.pdf'; 
+    link.download = 'Suraj_Nawale_CV.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   const handleTerminalSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const input = terminalInput.trim().toLowerCase();
-    if (!input) return;
+    const cmd = terminalInput.trim().toLowerCase();
+    if (!cmd) return;
 
-    let response: string | string[] = `sh: command not found: ${input}`;
+    let out: string | string[] = `Error: '${cmd}' not recognized. Type 'help' for available commands.`;
     
-    if (input === 'help') response = 'Available: status, run-audit, diagnostics, clear, whoami, download-cv';
-    if (input === 'status') response = 'CLUSTER_HEALTH: 100% | TESTS_PENDING: 0 | API_LATENCY: 42ms | REGRESSION_STATUS: PASS';
-    if (input === 'run-audit') response = 'AUDIT_LOG: All systems optimal. Verification complete. Zero vulnerabilities detected.';
-    if (input === 'whoami') response = `User: ${portfolioData.name} | Role: Senior Quality Architect | Stack: ${portfolioData.skills[0].skills.slice(0, 3).join(', ')}`;
-    if (input === 'download-cv') response = 'RESUME_SYNC: Initiating file stream... (Resume download would trigger here)';
-    if (input === 'diagnostics') {
-      response = [
-        'RUNNING_SITE_DIAGNOSTICS...',
-        'Checking DOM Integrity... OK',
-        'Validating Layout Constraints... OK',
-        'Testing Interactivity Hooks... OK',
-        'Memory Footprint: 14.2MB (Highly Optimized)',
-        'RESULT: SYSTEM_PERFORMANCE_A+'
-      ];
+    // Commands matching your screenshot
+    if (cmd === 'help') {
+      out = ['Available: status, run-audit, diagnostics, clear, whoami, download-cv'];
+    } else if (cmd === 'status') {
+      out = 'CLUSTER_HEALTH: 100% | TESTS_PENDING: 0 | API_LATENCY: 42ms | REGRESSION_STATUS: PASS';
+    } else if (cmd === 'whoami') {
+      out = `User: ${portfolioData.name} | Role: ${portfolioData.title} | Stack: n8n, Make.com, GitHub Copilot`;
+    } else if (cmd === 'run-audit') {
+      out = ['INITIATING AUDIT...', 'SCANNING_DB... [OK]', 'CHECKING_API_ENDPOINTS... [OK]', 'RESULT: SYSTEM SECURE.'];
+    } else if (cmd === 'diagnostics') {
+      out = ['CPU: 12%', 'RAM: 4.2GB / 16GB', 'LATENCY: 14ms', 'UPTIME: 99.99%'];
+    } else if (cmd === 'download-cv') {
+      out = 'RESUME_SYNC: Initiating file stream...';
+      triggerDownload();
+    } else if (cmd === 'clear') {
+      setTerminalLines(['[SYSTEM_REFRESHED]']);
+      setTerminalInput('');
+      return;
     }
-    
-    if (input === 'clear') {
-      setTerminalLines(['[SYSTEM_CLEARED]']);
-    } else {
-      const newLines = Array.isArray(response) ? response : [response];
-      setTerminalLines(prev => [...prev, `> ${terminalInput}`, ...newLines]);
-    }
+
+    setTerminalLines(prev => [...prev, `> ${terminalInput}`, ...(Array.isArray(out) ? out : [out])]);
     setTerminalInput('');
   };
 
@@ -214,7 +221,7 @@ const App: React.FC = () => {
                     {terminalLines.map((line, i) => (
                       <div key={i} className={line.startsWith('>') ? 'text-blue-400' : ''}>{line}</div>
                     ))}
-                    <div ref={terminalEndRef} />
+                    <div ref={terminalBodyRef} />
                   </div>
                   <form onSubmit={handleTerminalSubmit} className="flex gap-2 items-center">
                     <span className="text-blue-400">λ</span>
