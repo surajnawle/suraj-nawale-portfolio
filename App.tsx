@@ -14,11 +14,6 @@ const App: React.FC = () => {
     }
   }, [terminalLines]);
 
-  const triggerDownload = () => {
-    // Open LinkedIn profile in new tab where CV is available
-    window.open(portfolioData.contact.linkedin, '_blank');
-  };
-
   const handleTerminalSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const cmd = terminalInput.trim().toLowerCase();
@@ -28,7 +23,7 @@ const App: React.FC = () => {
     
     // Commands matching your screenshot
     if (cmd === 'help') {
-      out = ['Available: status, run-audit, diagnostics, clear, whoami, download-cv'];
+      out = ['Available: status, run-audit, diagnostics, clear, whoami'];
     } else if (cmd === 'status') {
       out = 'CLUSTER_HEALTH: 100% | TESTS_PENDING: 0 | API_LATENCY: 42ms | REGRESSION_STATUS: PASS';
     } else if (cmd === 'whoami') {
@@ -37,9 +32,6 @@ const App: React.FC = () => {
       out = ['INITIATING AUDIT...', 'SCANNING_DB... [OK]', 'CHECKING_API_ENDPOINTS... [OK]', 'RESULT: SYSTEM SECURE.'];
     } else if (cmd === 'diagnostics') {
       out = ['CPU: 12%', 'RAM: 4.2GB / 16GB', 'LATENCY: 14ms', 'UPTIME: 99.99%'];
-    } else if (cmd === 'download-cv') {
-      out = 'OPENING_LINKEDIN_PROFILE: Resume available for view/download...';
-      triggerDownload();
     } else if (cmd === 'clear') {
       setTerminalLines(['[SYSTEM_REFRESHED]']);
       setTerminalInput('');
