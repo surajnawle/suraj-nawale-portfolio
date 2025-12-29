@@ -1,15 +1,146 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Suraj Nawale | QA & ETL Test Engineer</title>
-    <script type="module" crossorigin src="/suraj-nawale-portfolio/assets/index-DKTVLOMl.js"></script>
-    <link rel="stylesheet" crossorigin href="/suraj-nawale-portfolio/assets/index-gddOUOhu.css">
-  </head>
-  <body>
-    <div id="root"></div>
 
-    <!-- Vite entry -->
-  </body>
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth scroll-pt-20">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SURAJ NAWLE | AI Automation & QA Engineer</title>
+    <meta name="description" content="Portfolio of Suraj Nawle, a Senior Quality Architect specializing in AI Automation and E2E Testing.">
+    
+    <!-- Open Graph / LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="SURAJ NAWLE | AI Automation & QA Engineer">
+    <meta property="og:description" content="Bridging industrial-grade maintenance with AI-driven testing.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-emerald: #10b981;
+            --surface-obsidian: #050505;
+            --surface-steel: #121212;
+            --text-platinum: #fdfdfd;
+            --text-muted: #888888;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--surface-obsidian);
+            color: var(--text-muted);
+        }
+        .font-serif {
+            font-family: 'DM Serif Display', serif;
+        }
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .bg-blueprint {
+            background-size: 80px 80px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(to right, rgba(16, 185, 129, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(16, 185, 129, 0.05) 1px, transparent 1px);
+            background-position: 0 0, 0 0, 40px 40px, 40px 40px;
+        }
+        .mechanical-border {
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+        }
+        .mechanical-border::before, .mechanical-border::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-color: var(--brand-emerald);
+            border-style: solid;
+            opacity: 0.5;
+        }
+        .corner-tl::before { top: -2px; left: -2px; border-width: 2px 0 0 2px; }
+        .corner-tr::after { top: -2px; right: -2px; border-width: 2px 2px 0 0; }
+        .corner-bl::before { bottom: -2px; left: -2px; border-width: 0 0 2px 2px; }
+        .corner-br::after { bottom: -2px; right: -2px; border-width: 0 2px 2px 0; }
+
+        .glass-industrial {
+            background: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+        }
+        .glass-industrial:hover {
+            border-color: rgba(16, 185, 129, 0.3);
+            background: rgba(22, 22, 22, 0.9);
+        }
+        .text-platinum { color: var(--text-platinum); }
+        .platinum-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, #777777 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .btn-industrial {
+            background: var(--text-platinum);
+            color: var(--surface-obsidian);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+        }
+        .btn-industrial:hover {
+            background: var(--brand-emerald);
+            color: white;
+            transform: scale(1.02);
+        }
+        .timeline-industrial::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            bottom: 20px;
+            width: 2px;
+            background: repeating-linear-gradient(to bottom, transparent, transparent 10px, rgba(255,255,255,0.05) 10px, rgba(255,255,255,0.05) 20px);
+        }
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        .scanline {
+            animation: scanline 4s linear infinite;
+        }
+        .pulse-emerald {
+            animation: pulse-emerald 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse-emerald {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .3; }
+        }
+        @media (min-width: 1024px) {
+            .timeline-industrial::before { left: 50%; transform: translateX(-50%); }
+        }
+        ::selection { background: var(--brand-emerald); color: white; }
+    </style>
+
+<link rel="stylesheet" href="/index.css">
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "vite": "https://esm.sh/vite@^7.3.0",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
+  }
+}
+</script>
+  <script type="module" crossorigin src="./assets/index-952UXnbS.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/vendor-DmnVtGYe.js">
+</head>
+<body class="antialiased overflow-x-hidden selection:bg-emerald-500 selection:text-white">
+    <div id="root"></div>
+</body>
 </html>
