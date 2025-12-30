@@ -102,8 +102,8 @@ const App: React.FC = () => {
                 <a href="#contact" className="btn-industrial px-12 py-5 text-[11px] text-center flex items-center justify-center gap-3">
                   INITIATE_ENGAGEMENT
                 </a>
-                <a href={portfolioData.contact.linkedin} target="_blank" className="px-12 py-5 border border-white/10 hover:border-emerald-500/50 text-white text-[11px] font-black rounded-sm transition-all text-center uppercase tracking-[0.2em] bg-white/5 flex items-center justify-center gap-3 group">
-                  <span className="group-hover:text-emerald-400 transition-colors">VIEW_PROFESSIONAL_CV</span>
+                <a href="/resume.pdf" download="Suraj_Nawale_CV.pdf" className="px-12 py-5 border border-white/10 hover:border-emerald-500/50 text-white text-[11px] font-black rounded-sm transition-all text-center uppercase tracking-[0.2em] bg-white/5 flex items-center justify-center gap-3 group">
+                  <span className="group-hover:text-emerald-400 transition-colors">DOWNLOAD_CV</span>
                 </a>
               </div>
             </div>
