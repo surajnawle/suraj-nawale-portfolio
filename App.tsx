@@ -3,6 +3,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import Navbar from './components/Navbar';
 import { portfolioData } from './config';
 
+const workProcess = [
+  { step: '01', title: 'Assessment', detail: 'Deep analysis of current workflows and infrastructure to identify friction points.' },
+  { step: '02', title: 'Architecture', detail: 'Designing resilient automation frameworks tailored to specific business needs.' },
+  { step: '03', title: 'Automation', detail: 'Deploying custom scripts and AI agents to handle repetitive tasks with precision.' },
+  { step: '04', title: 'Assurance', detail: 'Continuous monitoring and rigorous testing to guarantee 99.9% system reliability.' },
+];
+
 const App: React.FC = () => {
   const [terminalLines, setTerminalLines] = useState<string[]>(['[SYSTEM_READY]', 'Type "help" for commands...']);
   const [terminalInput, setTerminalInput] = useState('');
@@ -20,7 +27,7 @@ const App: React.FC = () => {
     if (!cmd) return;
 
     let out: string | string[] = `Error: '${cmd}' not recognized. Type 'help' for available commands.`;
-    
+
     // Commands matching your screenshot
     if (cmd === 'help') {
       out = ['Available: status, run-audit, diagnostics, clear, whoami'];
@@ -42,9 +49,17 @@ const App: React.FC = () => {
     setTerminalInput('');
   };
 
-  const handleEmailClick = () => {
-    console.log('Opening email client for:', portfolioData.contact.email);
-    window.location.href = `mailto:${portfolioData.contact.email}`;
+  const [emailButtonText, setEmailButtonText] = useState('REQUEST_TECHNICAL_HANDSHAKE');
+
+  const handleEmailClick = (e: React.MouseEvent) => {
+    // Attempt copy to clipboard
+    navigator.clipboard.writeText(portfolioData.contact.email);
+
+    // Visual feedback
+    setEmailButtonText('EMAIL COPIED TO CLIPBOARD');
+    setTimeout(() => setEmailButtonText('REQUEST_TECHNICAL_HANDSHAKE'), 3000);
+
+    console.log('Email copied:', portfolioData.contact.email);
   };
 
   return (
@@ -55,13 +70,13 @@ const App: React.FC = () => {
       <Navbar />
 
       <main className="relative">
-        
+
         {/* HERO */}
         <section id="hero" className="min-h-screen flex items-center pt-24 pb-20 px-6 bg-blueprint relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-[#050505]/95 to-[#050505]"></div>
           <div className="max-w-7xl mx-auto w-full relative z-10">
             <div className="max-w-6xl relative">
-              
+
               {/* Status Section */}
               <div className="flex flex-wrap gap-8 mb-16">
                 <div className="flex flex-col gap-2">
@@ -86,12 +101,12 @@ const App: React.FC = () => {
                   </div>
                 </div>
               </div>
-              
+
               <h1 className="text-6xl md:text-9xl font-serif mb-12 text-platinum leading-[0.9] tracking-tighter platinum-gradient text-left">
-                Precision.<br/>
+                Precision.<br />
                 <span className="italic font-light opacity-80">Autonomous.</span>
               </h1>
-              
+
               <p className="text-2xl md:text-4xl text-neutral-400 font-light leading-tight tracking-tight mb-16 max-w-4xl text-left">
                 Bridging <span className="text-white font-medium italic">industrial-grade maintenance</span> with <span className="text-emerald-500 font-medium font-mono uppercase text-sm tracking-[0.2em]">AI-driven testing</span> to ensure absolute system integrity.
               </p>
@@ -109,25 +124,25 @@ const App: React.FC = () => {
 
           {/* Stats Overlay on Hero */}
           <div className="hidden xl:block absolute right-20 bottom-20 w-80 glass-industrial mechanical-border p-8 shadow-2xl z-20">
-              <div className="flex items-center justify-between mb-8">
-                <span className="text-[8px] font-mono font-bold text-neutral-500 uppercase tracking-widest">System_Metrics</span>
-                <div className="flex gap-1">
-                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 pulse-emerald"></div>
-                </div>
-              </div>
-              <div className="space-y-6">
-                {[
-                  { label: 'Total XP', val: '3.5 YEARS', color: 'text-platinum' },
-                  { label: 'Uptime Goal', val: '99.9%', color: 'text-emerald-500' },
-                  { label: 'Automation', val: 'ENABLED', color: 'text-blue-400' }
-                ].map((stat, i) => (
-                  <div key={i} className="flex justify-between items-end border-b border-white/5 pb-3">
-                    <span className="text-[10px] font-mono text-neutral-600 uppercase tracking-tighter">{stat.label}</span>
-                    <span className={`text-sm font-mono font-bold ${stat.color}`}>{stat.val}</span>
-                  </div>
-                ))}
+            <div className="flex items-center justify-between mb-8">
+              <span className="text-[8px] font-mono font-bold text-neutral-500 uppercase tracking-widest">System_Metrics</span>
+              <div className="flex gap-1">
+                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 pulse-emerald"></div>
               </div>
             </div>
+            <div className="space-y-6">
+              {[
+                { label: 'Total XP', val: '3.5 YEARS', color: 'text-platinum' },
+                { label: 'Uptime Goal', val: '99.9%', color: 'text-emerald-500' },
+                { label: 'Automation', val: 'ENABLED', color: 'text-blue-400' }
+              ].map((stat, i) => (
+                <div key={i} className="flex justify-between items-end border-b border-white/5 pb-3">
+                  <span className="text-[10px] font-mono text-neutral-600 uppercase tracking-tighter">{stat.label}</span>
+                  <span className={`text-sm font-mono font-bold ${stat.color}`}>{stat.val}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </section>
 
         {/* BLUEPRINT (ABOUT) */}
@@ -142,16 +157,16 @@ const App: React.FC = () => {
                     {portfolioData.detailedBio}
                   </p>
                 </div>
-                
+
                 {/* Mechanical Callout */}
                 <div className="p-8 border border-blue-500/20 bg-blue-500/5 corner-tl corner-br mechanical-border relative group overflow-hidden">
-                   <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                      <span className="text-6xl uppercase font-black text-blue-500 font-mono">ROOT</span>
-                   </div>
-                   <h4 className="text-blue-400 font-mono text-[10px] font-bold uppercase tracking-[0.5em] mb-4">THE_FOUNDATION</h4>
-                   <p className="text-sm text-neutral-400 leading-relaxed italic text-left">
-                     My background as a **Certified Maintenance Technician** gives me a unique advantage in QA: I don't just look for software bugs; I understand systemic failure points and root-cause analysis like a hardware engineer.
-                   </p>
+                  <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <span className="text-6xl uppercase font-black text-blue-500 font-mono">ROOT</span>
+                  </div>
+                  <h4 className="text-blue-400 font-mono text-[10px] font-bold uppercase tracking-[0.5em] mb-4">THE_FOUNDATION</h4>
+                  <p className="text-sm text-neutral-400 leading-relaxed italic text-left">
+                    My background as a **Certified Maintenance Technician** gives me a unique advantage in QA: I don't just look for software bugs; I understand systemic failure points and root-cause analysis like a hardware engineer.
+                  </p>
                 </div>
 
                 <div className="grid gap-5">
@@ -210,8 +225,8 @@ const App: React.FC = () => {
                   </div>
                   <form onSubmit={handleTerminalSubmit} className="flex gap-2 items-center">
                     <span className="text-blue-400">λ</span>
-                    <input 
-                      type="text" 
+                    <input
+                      type="text"
                       value={terminalInput}
                       onChange={(e) => setTerminalInput(e.target.value)}
                       placeholder="Type 'help'..."
@@ -227,22 +242,22 @@ const App: React.FC = () => {
         {/* WORK PROCESS */}
         <section id="process" className="py-24 md:py-32 px-6 bg-[#0a0a0a] border-y border-white/5 scroll-mt-20 overflow-hidden">
           <div className="max-w-7xl mx-auto relative">
-             <div className="mb-24 text-center">
-                <h2 className="text-[10px] font-black text-emerald-500 uppercase tracking-[0.8em] mb-4 font-mono">02_EXECUTION_LIFECYCLE</h2>
-                <h3 className="text-6xl font-serif text-white tracking-tighter italic leading-none">The Methodology.</h3>
-             </div>
-             <div className="grid md:grid-cols-4 gap-12 relative">
-                <div className="hidden md:block absolute top-[60px] left-[10%] right-[10%] h-[1px] bg-white/5"></div>
-                {workProcess.map((item, i) => (
-                   <div key={i} className="relative group text-center md:text-left">
-                      <div className="w-16 h-16 bg-neutral-900 mechanical-border corner-tl corner-br text-emerald-500 flex items-center justify-center font-mono font-black text-xl mb-10 mx-auto md:mx-0 group-hover:bg-emerald-500 group-hover:text-black transition-all">
-                         {item.step}
-                      </div>
-                      <h4 className="text-2xl font-serif text-white mb-4 italic">{item.title}</h4>
-                      <p className="text-sm text-neutral-500 leading-relaxed font-light italic">{item.detail}</p>
-                   </div>
-                ))}
-             </div>
+            <div className="mb-24 text-center">
+              <h2 className="text-[10px] font-black text-emerald-500 uppercase tracking-[0.8em] mb-4 font-mono">02_EXECUTION_LIFECYCLE</h2>
+              <h3 className="text-6xl font-serif text-white tracking-tighter italic leading-none">The Methodology.</h3>
+            </div>
+            <div className="grid md:grid-cols-4 gap-12 relative">
+              <div className="hidden md:block absolute top-[60px] left-[10%] right-[10%] h-[1px] bg-white/5"></div>
+              {workProcess.map((item, i) => (
+                <div key={i} className="relative group text-center md:text-left">
+                  <div className="w-16 h-16 bg-neutral-900 mechanical-border corner-tl corner-br text-emerald-500 flex items-center justify-center font-mono font-black text-xl mb-10 mx-auto md:mx-0 group-hover:bg-emerald-500 group-hover:text-black transition-all">
+                    {item.step}
+                  </div>
+                  <h4 className="text-2xl font-serif text-white mb-4 italic">{item.title}</h4>
+                  <p className="text-sm text-neutral-500 leading-relaxed font-light italic">{item.detail}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -331,112 +346,112 @@ const App: React.FC = () => {
         {/* SERVICE PACKAGES */}
         <section id="packages" className="py-24 md:py-32 px-6 bg-[#0a0a0a] border-y border-white/5 scroll-mt-20">
           <div className="max-w-7xl mx-auto">
-             <div className="mb-24 text-center md:text-left">
-                <h2 className="text-[10px] font-black text-emerald-500 uppercase tracking-[0.8em] mb-4 font-mono">06_ENGAGEMENT_MODULES</h2>
-                <h3 className="text-6xl font-serif text-white tracking-tighter italic">Introductory Offers.</h3>
-             </div>
-             <div className="grid md:grid-cols-3 gap-8">
-                {portfolioData.packages.map((pkg, i) => (
-                   <div key={i} className={`p-10 mechanical-border corner-tl corner-br flex flex-col group transition-all duration-500 ${pkg.isPopular ? 'bg-emerald-500/5 border-emerald-500/30' : 'bg-neutral-900/30'} hover:translate-y-[-8px] text-left`}>
-                      {pkg.isPopular && <span className="text-[8px] font-mono text-emerald-500 font-bold mb-4 uppercase tracking-[0.4em]">RECOMMENDED_START</span>}
-                      <h4 className="text-2xl font-serif text-white mb-2 italic">{pkg.name}</h4>
-                      <p className="text-emerald-500 font-mono text-xl font-bold mb-8 group-hover:text-white transition-colors">{pkg.price}</p>
-                      <ul className="space-y-4 mb-10 flex-1">
-                         {pkg.features.map((feat, j) => (
-                            <li key={j} className="text-sm text-neutral-400 flex gap-3 font-light italic">
-                               <span className="text-emerald-500 text-[10px] mt-1 group-hover:scale-125 transition-transform">✓</span>
-                               {feat}
-                            </li>
-                         ))}
-                      </ul>
-                      <a href="#contact" className={`py-4 text-center text-[10px] font-black uppercase tracking-[0.2em] font-mono transition-all ${pkg.isPopular ? 'bg-emerald-500 text-black hover:bg-white' : 'border border-white/10 text-white hover:border-emerald-500'}`}>
-                         ACQUIRE_MODULE
-                      </a>
-                   </div>
-                ))}
-             </div>
+            <div className="mb-24 text-center md:text-left">
+              <h2 className="text-[10px] font-black text-emerald-500 uppercase tracking-[0.8em] mb-4 font-mono">06_ENGAGEMENT_MODULES</h2>
+              <h3 className="text-6xl font-serif text-white tracking-tighter italic">Introductory Offers.</h3>
+            </div>
+            <div className="grid md:grid-cols-3 gap-8">
+              {portfolioData.packages.map((pkg, i) => (
+                <div key={i} className={`p-10 mechanical-border corner-tl corner-br flex flex-col group transition-all duration-500 ${pkg.isPopular ? 'bg-emerald-500/5 border-emerald-500/30' : 'bg-neutral-900/30'} hover:translate-y-[-8px] text-left`}>
+                  {pkg.isPopular && <span className="text-[8px] font-mono text-emerald-500 font-bold mb-4 uppercase tracking-[0.4em]">RECOMMENDED_START</span>}
+                  <h4 className="text-2xl font-serif text-white mb-2 italic">{pkg.name}</h4>
+                  <p className="text-emerald-500 font-mono text-xl font-bold mb-8 group-hover:text-white transition-colors">{pkg.price}</p>
+                  <ul className="space-y-4 mb-10 flex-1">
+                    {pkg.features.map((feat, j) => (
+                      <li key={j} className="text-sm text-neutral-400 flex gap-3 font-light italic">
+                        <span className="text-emerald-500 text-[10px] mt-1 group-hover:scale-125 transition-transform">✓</span>
+                        {feat}
+                      </li>
+                    ))}
+                  </ul>
+                  <a href="#contact" className={`py-4 text-center text-[10px] font-black uppercase tracking-[0.2em] font-mono transition-all ${pkg.isPopular ? 'bg-emerald-500 text-black hover:bg-white' : 'border border-white/10 text-white hover:border-emerald-500'}`}>
+                    ACQUIRE_MODULE
+                  </a>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
         {/* TESTIMONIALS */}
         <section id="testimonials" className="py-24 md:py-32 px-6 bg-[#050505] scroll-mt-20">
           <div className="max-w-7xl mx-auto">
-             <div className="grid lg:grid-cols-2 gap-20 items-center">
-                <div className="text-left">
-                   <h2 className="text-[10px] font-black text-emerald-500 uppercase tracking-[0.8em] mb-6 font-mono">07_CLIENT_FEEDBACK</h2>
-                   <h3 className="text-6xl font-serif text-white tracking-tighter italic leading-tight mb-8">Professional<br/>Endorsements.</h3>
-                   <div className="space-y-12">
-                      {portfolioData.testimonials.map((t, i) => (
-                         <div key={i} className="relative pl-12 border-l border-emerald-500/30">
-                            <span className="absolute left-[-15px] top-0 text-4xl text-emerald-500/20 italic font-serif">"</span>
-                            <p className="text-xl text-neutral-400 leading-relaxed font-light italic mb-6">
-                               {t.text}
-                            </p>
-                            <div>
-                               <p className="text-white font-bold uppercase tracking-widest">{t.name}</p>
-                               <p className="text-emerald-500 font-mono text-[10px] font-bold uppercase tracking-[0.4em]">{t.role}</p>
-                            </div>
-                         </div>
-                      ))}
-                   </div>
+            <div className="grid lg:grid-cols-2 gap-20 items-center">
+              <div className="text-left">
+                <h2 className="text-[10px] font-black text-emerald-500 uppercase tracking-[0.8em] mb-6 font-mono">07_CLIENT_FEEDBACK</h2>
+                <h3 className="text-6xl font-serif text-white tracking-tighter italic leading-tight mb-8">Professional<br />Endorsements.</h3>
+                <div className="space-y-12">
+                  {portfolioData.testimonials.map((t, i) => (
+                    <div key={i} className="relative pl-12 border-l border-emerald-500/30">
+                      <span className="absolute left-[-15px] top-0 text-4xl text-emerald-500/20 italic font-serif">"</span>
+                      <p className="text-xl text-neutral-400 leading-relaxed font-light italic mb-6">
+                        {t.text}
+                      </p>
+                      <div>
+                        <p className="text-white font-bold uppercase tracking-widest">{t.name}</p>
+                        <p className="text-emerald-500 font-mono text-[10px] font-bold uppercase tracking-[0.4em]">{t.role}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-                <div className="mechanical-border p-12 bg-neutral-900/40 rounded-sm">
-                   <p className="text-[9px] font-mono text-emerald-500 uppercase tracking-[0.4em] mb-8 font-bold text-left">PERFORMANCE_METRICS</p>
-                   <div className="space-y-8">
-                      {[
-                        { label: 'System Uptime', val: '99.9%' },
-                        { label: 'Bug Detection Rate', val: '98.5%' },
-                        { label: 'Automation Coverage', val: '88%' }
-                      ].map((m, i) => (
-                         <div key={i}>
-                            <div className="flex justify-between text-xs mb-2 uppercase tracking-widest font-mono">
-                               <span>{m.label}</span>
-                               <span className="text-emerald-500 font-bold">{m.val}</span>
-                            </div>
-                            <div className="h-1 bg-neutral-800 w-full overflow-hidden">
-                               <div className="h-full bg-emerald-500/50" style={{ width: m.val }}></div>
-                            </div>
-                         </div>
-                      ))}
-                   </div>
+              </div>
+              <div className="mechanical-border p-12 bg-neutral-900/40 rounded-sm">
+                <p className="text-[9px] font-mono text-emerald-500 uppercase tracking-[0.4em] mb-8 font-bold text-left">PERFORMANCE_METRICS</p>
+                <div className="space-y-8">
+                  {[
+                    { label: 'System Uptime', val: '99.9%' },
+                    { label: 'Bug Detection Rate', val: '98.5%' },
+                    { label: 'Automation Coverage', val: '88%' }
+                  ].map((m, i) => (
+                    <div key={i}>
+                      <div className="flex justify-between text-xs mb-2 uppercase tracking-widest font-mono">
+                        <span>{m.label}</span>
+                        <span className="text-emerald-500 font-bold">{m.val}</span>
+                      </div>
+                      <div className="h-1 bg-neutral-800 w-full overflow-hidden">
+                        <div className="h-full bg-emerald-500/50" style={{ width: m.val }}></div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-             </div>
+              </div>
+            </div>
           </div>
         </section>
 
         {/* CONTACT */}
         <section id="contact" className="py-24 md:py-32 px-6 bg-[#050505] scroll-mt-20 border-t border-white/5">
           <div className="max-w-6xl mx-auto">
-             <div className="grid lg:grid-cols-2 gap-24 items-center">
-                <div className="text-left">
-                   <h2 className="text-[10px] font-black text-emerald-500 uppercase tracking-[0.8em] mb-6 font-mono">08_COMMUNICATION</h2>
-                   <h3 className="text-7xl font-serif text-white tracking-tighter italic mb-10">Establish<br/>Connection.</h3>
-                   <div className="space-y-8">
-                      <div className="group">
-                        <p className="text-[10px] font-bold text-neutral-600 uppercase tracking-[0.5em] mb-2 font-mono group-hover:text-emerald-500 transition-colors">Endpoint</p>
-                        <a href={`mailto:${portfolioData.contact.email}`} className="text-2xl font-serif text-white hover:text-emerald-500 transition-all border-b border-emerald-500/10 pb-2 inline-block">
-                          {portfolioData.contact.email}
-                        </a>
-                      </div>
-                      <div className="group">
-                        <p className="text-[10px] font-bold text-neutral-600 uppercase tracking-[0.5em] mb-2 font-mono group-hover:text-blue-400 transition-colors">LinkedIn</p>
-                        <a href={portfolioData.contact.linkedin} target="_blank" rel="noopener noreferrer" className="text-2xl font-serif text-white hover:text-blue-400 transition-all border-b border-blue-400/10 pb-2 inline-block uppercase">VIEW_PROFILE</a>
-                      </div>
-                   </div>
+            <div className="grid lg:grid-cols-2 gap-24 items-center">
+              <div className="text-left">
+                <h2 className="text-[10px] font-black text-emerald-500 uppercase tracking-[0.8em] mb-6 font-mono">08_COMMUNICATION</h2>
+                <h3 className="text-7xl font-serif text-white tracking-tighter italic mb-10">Establish<br />Connection.</h3>
+                <div className="space-y-8">
+                  <div className="group">
+                    <p className="text-[10px] font-bold text-neutral-600 uppercase tracking-[0.5em] mb-2 font-mono group-hover:text-emerald-500 transition-colors">Endpoint</p>
+                    <a href={`mailto:${portfolioData.contact.email}`} className="text-2xl font-serif text-white hover:text-emerald-500 transition-all border-b border-emerald-500/10 pb-2 inline-block">
+                      {portfolioData.contact.email}
+                    </a>
+                  </div>
+                  <div className="group">
+                    <p className="text-[10px] font-bold text-neutral-600 uppercase tracking-[0.5em] mb-2 font-mono group-hover:text-blue-400 transition-colors">LinkedIn</p>
+                    <a href={portfolioData.contact.linkedin} target="_blank" rel="noopener noreferrer" className="text-2xl font-serif text-white hover:text-blue-400 transition-all border-b border-blue-400/10 pb-2 inline-block uppercase">VIEW_PROFILE</a>
+                  </div>
                 </div>
-                <div className="glass-industrial mechanical-border p-16 text-center relative shadow-2xl bg-neutral-900/20">
-                   <h4 className="text-3xl font-serif text-white mb-8 uppercase italic leading-tight">Ready for System Audit?</h4>
-                   <div className="flex flex-col gap-4">
-                     <button onClick={handleEmailClick} className="btn-industrial inline-block w-full py-7 text-[11px]">REQUEST_TECHNICAL_HANDSHAKE</button>
-                     <a href={portfolioData.contact.linkedin} target="_blank" className="border border-white/10 hover:border-emerald-500/50 py-5 text-[10px] font-bold text-white tracking-widest uppercase transition-all flex items-center justify-center gap-3">
-                       CONNECT_ON_LINKEDIN
-                     </a>
-                   </div>
-                   <div className="mt-8">
-                     <p className="text-[10px] font-mono text-emerald-500/70 uppercase tracking-[0.3em] font-bold">STATUS: {portfolioData.contact.availability}</p>
-                   </div>
+              </div>
+              <div className="glass-industrial mechanical-border p-16 text-center relative shadow-2xl bg-neutral-900/20">
+                <h4 className="text-3xl font-serif text-white mb-8 uppercase italic leading-tight">Ready for System Audit?</h4>
+                <div className="flex flex-col gap-4">
+                  <a href={`mailto:${portfolioData.contact.email}`} onClick={handleEmailClick} className="btn-industrial inline-block w-full py-7 text-[11px] text-center">{emailButtonText}</a>
+                  <a href={portfolioData.contact.linkedin} target="_blank" className="border border-white/10 hover:border-emerald-500/50 py-5 text-[10px] font-bold text-white tracking-widest uppercase transition-all flex items-center justify-center gap-3">
+                    CONNECT_ON_LINKEDIN
+                  </a>
                 </div>
-             </div>
+                <div className="mt-8">
+                  <p className="text-[10px] font-mono text-emerald-500/70 uppercase tracking-[0.3em] font-bold">STATUS: {portfolioData.contact.availability}</p>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       </main>
@@ -450,7 +465,7 @@ const App: React.FC = () => {
             </div>
             <p className="text-[8px] font-mono text-neutral-700 uppercase tracking-widest">Architected & Verified by {portfolioData.name.toUpperCase()}</p>
           </div>
-          
+
           <div className="flex flex-wrap justify-center gap-10 text-[10px] font-mono uppercase tracking-[0.5em] text-neutral-500 font-bold">
             <a href="#hero" className="hover:text-emerald-500 transition-colors">ROOT</a>
             <a href="#about" className="hover:text-emerald-500 transition-colors">BLUEPRINT</a>
