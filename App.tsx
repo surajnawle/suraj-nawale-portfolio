@@ -42,12 +42,10 @@ const App: React.FC = () => {
     setTerminalInput('');
   };
 
-  const workProcess = [
-    { step: "01", title: "Discovery & Audit", detail: "Deep dive into your current manual bottlenecks and data pipelines." },
-    { step: "02", title: "Architectural Blueprint", detail: "Designing the n8n logic or SDET framework architecture." },
-    { step: "03", title: "Development Sprint", detail: "High-speed engineering using GitHub Copilot and Python/Playwright." },
-    { step: "04", title: "Validation & Handover", detail: "Rigorous stress testing followed by live deployment and training." }
-  ];
+  const handleEmailClick = () => {
+    console.log('Opening email client for:', portfolioData.contact.email);
+    window.location.href = `mailto:${portfolioData.contact.email}`;
+  };
 
   return (
     <div className="min-h-screen relative bg-[#050505]">
@@ -429,7 +427,7 @@ const App: React.FC = () => {
                 <div className="glass-industrial mechanical-border p-16 text-center relative shadow-2xl bg-neutral-900/20">
                    <h4 className="text-3xl font-serif text-white mb-8 uppercase italic leading-tight">Ready for System Audit?</h4>
                    <div className="flex flex-col gap-4">
-                     <a href={`mailto:${portfolioData.contact.email}`} className="btn-industrial inline-block w-full py-7 text-[11px]">REQUEST_TECHNICAL_HANDSHAKE</a>
+                     <button onClick={handleEmailClick} className="btn-industrial inline-block w-full py-7 text-[11px]">REQUEST_TECHNICAL_HANDSHAKE</button>
                      <a href={portfolioData.contact.linkedin} target="_blank" className="border border-white/10 hover:border-emerald-500/50 py-5 text-[10px] font-bold text-white tracking-widest uppercase transition-all flex items-center justify-center gap-3">
                        CONNECT_ON_LINKEDIN
                      </a>
