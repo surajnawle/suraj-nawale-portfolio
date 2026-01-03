@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/suraj-nawale-portfolio/', // GitHub Pages repository path
+  base: '/', // GitHub Pages project page - no repo name needed
   build: {
     outDir: 'dist',
     sourcemap: false,
